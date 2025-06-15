@@ -1,0 +1,12 @@
+{
+  "name": "cordova-plugin-dynamic-icon",
+  "version": "1.0.0",
+  "description": "Cordova plugin to dynamically switch Android app icons",
+  "cordova": {
+    "id": "cordova-plugin-dynamic-icon",
+    "platforms": ["android"]
+  },
+  "keywords": ["cordova", "icon", "android", "dynamic"],
+  "author": "Your Name",
+  "license": "MIT"
+}
