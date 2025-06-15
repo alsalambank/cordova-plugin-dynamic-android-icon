@@ -9,5 +9,6 @@
   <platform name="android">
     <source-file src="src/android/DynamicIcon.java" target-dir="src/com/example/dynamicicon" />
     <hook type="after_plugin_install" src="hooks/after_plugin_install/copy-icons.js" />
+    <hook type="after_plugin_install" src="hooks/after_plugin_install/replace_package.js" />
   </platform>
 </plugin>
