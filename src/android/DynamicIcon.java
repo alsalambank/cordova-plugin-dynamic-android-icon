@@ -1,4 +1,4 @@
-package com.example.dynamicicon;
+package __PACKAGE__;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
