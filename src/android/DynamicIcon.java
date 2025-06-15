@@ -1,4 +1,4 @@
-package __PACKAGE__;
+package cordova.plugin.dynamicicon;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
