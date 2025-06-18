@@ -7,8 +7,9 @@
     <clobbers target="DynamicIcon" />
   </js-module>
   <platform name="android">
-    <source-file src="src/android/DynamicIcon.java" target-dir="src/cordova/plugin/dynamicicon" />
+    <source-file src="src/android/DynamicIcon.java" target-dir="src/temp" />
     <hook type="after_prepare" src="hooks/add-icon-aliases.js" />
     <hook type="after_prepare" src="hooks/after_plugin_install/copy-icons.js" />
+    <hook type="after_prepare" src="hooks/move-java-class.js" />
   </platform>
 </plugin>
