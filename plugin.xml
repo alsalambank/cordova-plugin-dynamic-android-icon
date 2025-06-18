@@ -9,6 +9,6 @@
   <platform name="android">
     <source-file src="src/android/DynamicIcon.java" target-dir="src/cordova/plugin/dynamicicon" />
     <hook type="after_prepare" src="hooks/add-icon-aliases.js" />
-    <hook type="after_plugin_install" src="hooks/after_plugin_install/copy-icons.js" />
+    <hook type="after_prepare" src="hooks/after_plugin_install/copy-icons.js" />
   </platform>
 </plugin>
