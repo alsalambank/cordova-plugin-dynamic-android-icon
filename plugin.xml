@@ -1,15 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <plugin id="cordova-plugin-dynamic-icon" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
   <name>DynamicIcon</name>
   <description>Cordova plugin to change Android app icon using activity aliases</description>
   <license>MIT</license>
+
   <js-module src="www/DynamicIcon.js" name="DynamicIcon">
     <clobbers target="DynamicIcon" />
   </js-module>
+
   <platform name="android">
-    <source-file src="src/android/DynamicIcon.java" target-dir="src/temp" />
-    <hook type="after_prepare" src="hooks/add-icon-aliases.js" />
-    <hook type="after_prepare" src="hooks/after_plugin_install/copy-icons.js" />
-    <hook type="after_prepare" src="hooks/move-java-class.js" />
+    <source-file
+      src="src/android/DynamicIcon.java"
+      target-dir="src/com/alsalambahrain/digitalbankingdev" />
+
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="DynamicIcon">
+        <param name="android-package" value="com.alsalambahrain.digitalbankingdev.DynamicIcon" />
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
   </platform>
 </plugin>
