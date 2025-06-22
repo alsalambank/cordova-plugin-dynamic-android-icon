@@ -9,9 +9,9 @@ import org.json.JSONException;
 public class DynamicIcon extends CordovaPlugin {
 
     private static final String[] ALIAS_NAMES = {
-        "__PACKAGE__.ClassicAlias",
-        "__PACKAGE__.RetroAlias",
-        "__PACKAGE__.PrivateAlias"
+        "com.alsalambahrain.asbblcplab.AlSalamBankJumioTest.ClassicAlias",
+        "com.alsalambahrain.asbblcplab.AlSalamBankJumioTest.RetroAlias",
+        "com.alsalambahrain.asbblcplab.AlSalamBankJumioTest.PrivateAlias"
     };
 
     @Override
