@@ -8,7 +8,7 @@
   </js-module>
 
   <platform name="android">
-    <config-file target="AndroidManifest.xml" parent="/*">
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
   <activity-alias
     android:enabled="false"
     android:icon="@mipmap/ic_launcher_classic"
@@ -35,7 +35,7 @@
     <hook type="after_prepare" src="hooks/add-icon-aliases.js" />
     <source-file
       src="src/android/DynamicIcon.java"
-      target-dir="src/com/alsalambahrain/digitalbankingdev" />
+      target-dir="src/com/alsalambahrain/asbblcplab/AlSalamBankJumioTest" />
 
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="DynamicIcon">
