@@ -3,59 +3,57 @@ const path = require('path');
 const xml2js = require('xml2js');
 
 module.exports = function (context) {
-  const platformResPath = path.join(context.opts.projectRoot, 'platforms', 'android', 'app', 'src', 'main', 'res');
+  const projectRoot = context.opts.projectRoot;
+  const platformResPath = path.join(projectRoot, 'platforms', 'android', 'app', 'src', 'main', 'res');
   const pluginRes = path.join(context.opts.plugin.dir, 'res');
-
   const mipmapDirs = ['mipmap-mdpi', 'mipmap-hdpi', 'mipmap-xhdpi', 'mipmap-xxhdpi', 'mipmap-xxxhdpi'];
 
-  // Copy and rename icon files
+  // ✅ Step 1: Copy icons to Android res folders
   mipmapDirs.forEach(dir => {
-    const targetDir = path.join(platformResPath, dir);
     const sourceDir = path.join(pluginRes, dir);
+    const targetDir = path.join(platformResPath, dir);
+
     if (!fs.existsSync(sourceDir)) return;
     if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
 
     fs.readdirSync(sourceDir).forEach(file => {
-      const baseName = path.parse(file).name; // e.g. classic, retro, private
-      const ext = path.extname(file);         // e.g. .png
-      const targetFileName = `ic_launcher_${baseName}${ext}`;
-      const sourceFile = path.join(sourceDir, file);
-      const destFile = path.join(targetDir, targetFileName);
-
-      fs.copyFileSync(sourceFile, destFile);
-      console.log(`✔ Copied ${file} ➝ ${targetFileName}`);
+      const srcFile = path.join(sourceDir, file);
+      const destFile = path.join(targetDir, file);
+      fs.copyFileSync(srcFile, destFile);
+      console.log(`✔ Copied ${file} to ${targetDir}`);
     });
   });
 
-  // Package name replacement in Java source
-  const configPath = path.join(context.opts.projectRoot, 'config.xml');
-  const javaFileRelPath = 'com/example/dynamicicon/DynamicIcon.java';
-  const javaFilePath = path.join(context.opts.projectRoot, 'platforms', 'android', 'app', 'src', 'main', 'java', javaFileRelPath);
-
-  if (!fs.existsSync(configPath) || !fs.existsSync(javaFilePath)) {
-    console.warn('⚠️  Missing config.xml or Java file for package substitution.');
+  // ✅ Step 2: Replace __PACKAGE__ in DynamicIcon.java
+  const configPath = path.join(projectRoot, 'config.xml');
+  if (!fs.existsSync(configPath)) {
+    console.warn('⚠️ config.xml not found');
     return;
   }
+
+  const javaSrcDir = path.join(projectRoot, 'platforms', 'android', 'app', 'src', 'main', 'java');
 
   const xml = fs.readFileSync(configPath, 'utf-8');
   xml2js.parseString(xml, (err, result) => {
     if (err || !result.widget || !result.widget.$.id) {
-      console.warn('⚠️  Could not determine package name from config.xml.');
+      console.warn('⚠️ Could not parse package name from config.xml');
       return;
     }
 
     const packageName = result.widget.$.id;
-    let javaCode = fs.readFileSync(javaFilePath, 'utf-8');
-    javaCode = javaCode.replace(/__PACKAGE__/g, packageName);
-    fs.writeFileSync(javaFilePath, javaCode);
-    console.log(`✔ Replaced __PACKAGE__ with '${packageName}' in DynamicIcon.java`);
-  });
+    const packagePath = packageName.replace(/\./g, '/');
+    const javaFilePath = path.join(javaSrcDir, packagePath, 'DynamicIcon.java');
 
-  // Optional validation log
-  const expectedFile = path.join(platformResPath, 'mipmap-mdpi', 'ic_launcher_classic.png');
-  if (fs.existsSync(expectedFile)) {
-    console.log(`✅ Icon present: ${expectedFile}`);
-  } else {
-    console.warn(`❌ Icon missing: ${expectedFile}`);
-  }
+    if (!fs.existsSync(javaFilePath)) {
+      console.warn('⚠️ DynamicIcon.java not found at expected path:', javaFilePath);
+      return;
+    }
+
+    let javaCode = fs.readFileSync(javaFilePath, 'utf-8');
+    if (javaCode.includes('__PACKAGE__')) {
+      javaCode = javaCode.replace(/__PACKAGE__/g, packageName);
+      fs.writeFileSync(javaFilePath, javaCode);
+      console.log(`✔ Replaced __PACKAGE__ with ${packageName} in DynamicIcon.java`);
+    }
+  });
 };
