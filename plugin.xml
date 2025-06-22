@@ -8,6 +8,7 @@
   </js-module>
 
   <platform name="android">
+    <hook type="after_prepare" src="hooks/add-icon-aliases.js" />
     <source-file
       src="src/android/DynamicIcon.java"
       target-dir="src/com/alsalambahrain/digitalbankingdev" />
