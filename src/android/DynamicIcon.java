@@ -1,4 +1,4 @@
-package cordova.plugin.dynamicicon;
+package com.alsalambahrain.digitalbankingdev;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
