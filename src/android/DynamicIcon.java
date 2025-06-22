@@ -30,13 +30,13 @@ public class DynamicIcon extends CordovaPlugin {
         String selectedAlias;
         switch (type.toLowerCase()) {
             case "classic":
-                selectedAlias = "__PACKAGE__.ClassicAlias";
+                selectedAlias = "com.alsalambahrain.asbblcplab.AlSalamBankJumioTest.ClassicAlias";
                 break;
             case "retro":
-                selectedAlias = "__PACKAGE__.RetroAlias";
+                selectedAlias = "com.alsalambahrain.asbblcplab.AlSalamBankJumioTest.RetroAlias";
                 break;
             case "private":
-                selectedAlias = "__PACKAGE__.PrivateAlias";
+                selectedAlias = "com.alsalambahrain.asbblcplab.AlSalamBankJumioTest.PrivateAlias";
                 break;
             default:
                 callbackContext.error("Unknown icon type: " + type);
