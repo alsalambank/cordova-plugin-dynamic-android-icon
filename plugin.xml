@@ -8,7 +8,7 @@
   </js-module>
 
   <platform name="android">
-    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+    <config-file target="AndroidManifest.xml" parent="/*">
   <activity-alias
     android:enabled="false"
     android:icon="@mipmap/ic_launcher_classic"
