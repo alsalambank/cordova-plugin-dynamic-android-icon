@@ -1,4 +1,5 @@
-package com.alsalambahrain.digitalbankingdev;
+package com.test.app;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -9,9 +10,9 @@ import org.json.JSONException;
 public class DynamicIcon extends CordovaPlugin {
 
     private static final String[] ALIAS_NAMES = {
-        "com.alsalambahrain.asbblcplab.AlSalamBankJumioTest.ClassicAlias",
-        "com.alsalambahrain.asbblcplab.AlSalamBankJumioTest.RetroAlias",
-        "com.alsalambahrain.asbblcplab.AlSalamBankJumioTest.PrivateAlias"
+        ".ClassicAlias",
+        ".RetroAlias",
+        ".PrivateAlias"
     };
 
     @Override
@@ -30,13 +31,13 @@ public class DynamicIcon extends CordovaPlugin {
         String selectedAlias;
         switch (type.toLowerCase()) {
             case "classic":
-                selectedAlias = "com.alsalambahrain.asbblcplab.AlSalamBankJumioTest.ClassicAlias";
+                selectedAlias = ".ClassicAlias";
                 break;
             case "retro":
-                selectedAlias = "com.alsalambahrain.asbblcplab.AlSalamBankJumioTest.RetroAlias";
+                selectedAlias = ".RetroAlias";
                 break;
             case "private":
-                selectedAlias = "com.alsalambahrain.asbblcplab.AlSalamBankJumioTest.PrivateAlias";
+                selectedAlias = ".PrivateAlias";
                 break;
             default:
                 callbackContext.error("Unknown icon type: " + type);
