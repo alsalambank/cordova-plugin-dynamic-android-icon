@@ -2,10 +2,14 @@ package com.test.app;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import org.apache.cordova.*;
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import java.util.List;
 
 public class DynamicIcon extends CordovaPlugin {
 
@@ -54,9 +58,27 @@ public class DynamicIcon extends CordovaPlugin {
                     PackageManager.DONT_KILL_APP
                 );
             }
+            
+            // refresh launcher
+            refreshLauncher(context);
+
             callbackContext.success("Icon changed to: " + type);
         } catch (Exception e) {
             callbackContext.error("Failed to switch icon: " + e.getMessage());
+        }
+    }
+
+    private static void refreshLauncher(Context context) {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+
+        List<ResolveInfo> resolveInfos = context.getPackageManager().queryIntentActivities(intent, 0);
+        for (ResolveInfo info : resolveInfos) {
+            Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(info.activityInfo.packageName);
+            if (launchIntent != null) {
+                context.sendBroadcast(launchIntent);
+            }
         }
     }
 }

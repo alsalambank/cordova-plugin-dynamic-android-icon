@@ -34,7 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
       </activity-alias>
-      
+
       <activity-alias
         android:enabled="false"
         android:icon="@mipmap/ic_private"
@@ -47,6 +47,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
       </activity-alias>
+    </config-file>
+
+    <!-- Remove LAUNCHER intent filter from MainActivity -->
+    <config-file 
+        target="AndroidManifest.xml"
+        parent="/manifest/application/activity[@android:name='MainActivity']/intent-filter[action[@android:name='android.intent.action.MAIN'] and category[@android:name='android.intent.category.LAUNCHER']]"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <!-- Empty means remove the intent-filter node -->
     </config-file>
 
     <hook type="after_plugin_install" src="hooks/after_plugin_install/copy-icons.js" />
