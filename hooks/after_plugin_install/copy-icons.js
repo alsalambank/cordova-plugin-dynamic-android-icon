@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const xml2js = require('xml2js');
+const builder = new xml2js.Builder({ headless: false, pretty: true });
 
 module.exports = async function (context) {
   const projectRoot = context.opts.projectRoot;
