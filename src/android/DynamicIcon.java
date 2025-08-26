@@ -51,7 +51,7 @@ public class DynamicIcon extends CordovaPlugin {
         try {
             for (String alias : ALIAS_NAMES) {
                 pm.setComponentEnabledSetting(
-                    new ComponentName(context, alias),
+                    new ComponentName(context, context.getPackageName() + alias),
                     alias.equals(selectedAlias)
                         ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                         : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,

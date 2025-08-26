@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="ic_launcher_foreground_color_private">#FFFFFF</color>
+    <color name="ic_launcher_background_color_private">#D8A080</color>
+
+    <color name="ic_launcher_foreground_color_classic">#F2643B</color>
+    <color name="ic_launcher_background_color_classic">#071530</color>
+
+    <color name="ic_launcher_foreground_color_retro">#071530</color>
+    <color name="ic_launcher_background_color_retro">#E7E6E7</color>
+</resources>
