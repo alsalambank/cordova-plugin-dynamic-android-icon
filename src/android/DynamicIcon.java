@@ -49,15 +49,36 @@ public class DynamicIcon extends CordovaPlugin {
         }
 
         try {
+            // for (String alias : ALIAS_NAMES) {
+            //     pm.setComponentEnabledSetting(
+            //         new ComponentName(context, context.getPackageName() + alias),
+            //         alias.equals(selectedAlias)
+            //             ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+            //             : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            //         PackageManager.DONT_KILL_APP
+            //     );
+            // }
             for (String alias : ALIAS_NAMES) {
-                pm.setComponentEnabledSetting(
-                    new ComponentName(context, context.getPackageName() + alias),
-                    alias.equals(selectedAlias)
-                        ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                        : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP
-                );
+                if (alias.equals(selectedAlias)) {
+                    // Disabling aliases that are not the selected one
+                    packageManager.setComponentEnabledSetting(
+                        new ComponentName(this, packageName + alias),
+                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                        PackageManager.DONT_KILL_APP
+                    );
+                }
+            }            
+            for (String alias : ALIAS_NAMES) {
+                if (!alias.equals(selectedAlias)) {
+                    // Disabling aliases that are not the selected one
+                    packageManager.setComponentEnabledSetting(
+                        new ComponentName(this, packageName + alias),
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP
+                    );
+                }
             }
+            
             
             // refresh launcher
             refreshLauncher(context);
