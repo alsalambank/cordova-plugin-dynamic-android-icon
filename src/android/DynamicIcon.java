@@ -61,20 +61,20 @@ public class DynamicIcon extends CordovaPlugin {
       for (String alias: ALIAS_NAMES) {
         if (alias.equals(selectedAlias)) {
           // Disabling aliases that are not the selected one
-          packageManager.setComponentEnabledSetting(
+          pm.setComponentEnabledSetting(
             new ComponentName(context, context.getPackageName() + alias),
-            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP
+            pm.COMPONENT_ENABLED_STATE_ENABLED,
+            pm.DONT_KILL_APP
           );
         }
       }
       for (String alias: ALIAS_NAMES) {
         if (!alias.equals(selectedAlias)) {
           // Disabling aliases that are not the selected one
-          packageManager.setComponentEnabledSetting(
+          pm.setComponentEnabledSetting(
             new ComponentName(context, context.getPackageName() + alias),
-            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-            PackageManager.DONT_KILL_APP
+            pm.COMPONENT_ENABLED_STATE_DISABLED,
+            pm.DONT_KILL_APP
           );
         }
       }
